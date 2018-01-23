@@ -1,0 +1,43 @@
+<div class="list" ng-controller="mainCtrl">
+
+  <div class="add">
+    <a href="" ng-click="addTodo()">+ Skapa todo</a>
+  </div>
+
+  <!-- ng-class kollar ifall editing is true och lägger till class-->
+  <!-- ng-repeat loop-->
+  <!-- ng-init sätter alla todos till false så att när de blir true hamnar på botten av listan-->
+
+  <div class="item"
+
+        ng-class="{'editing-item': editing, 'edited':todo.edited, 'completed': todo.completed }"
+        ng-repeat="todo in todos | orderBy: 'completed'" ng-init="todo.completed = false">
+        <!-- ng-model värdet från input-->
+  <input ng-model="todo.completed"
+          type="checkbox" ng-click="todo.edited = true"/>
+          <span ng-click="todo.completed = !todo.completed"></span>
+          <!-- ng-hide göm editing(class)-->
+  <label ng-hide="editing"
+         ng-click="editing = true"
+        class="editing-label">{{todo.namn}}</label>
+        <!-- ng-change bolla med true och false ifall det blir ändring på todo.edited-->
+        <!-- ng-blur blura eller ej beroende på true och false-->
+        <!-- ng-show visa allt med (class) editing-->
+        <!-- ng-model värdet från input-->
+  <input ng-change="todo.edited = true"
+        ng-blur="editing = false;"
+        ng-show="editing"
+        ng-model="todo.namn"
+        class="editing-label" type="text"/>
+
+
+
+
+<div class="actions" >
+  <!-- <a href="" ng-click="editing = !editing">Edit</a> -->
+  <a href="" ng-click="saveTodos(todo)">Spara</a>
+  <a href="" ng-click="deleteTodo(todo, $index)" class="delete">Radera</a>
+ </div>
+</div>
+
+</div> <!--end list -->
